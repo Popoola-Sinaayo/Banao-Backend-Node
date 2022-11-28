@@ -50,10 +50,12 @@ const forgotPassword = (req, res, next) => {
       bcrypt.hash(password, 10).then((result) => {
         if (!result) {
           return res.json("An error occured");
+        } else {
+          User.updateOne({ username: username }, { password: result }).then(result => {
+            console.log(result)
+            return res.json("Password Change Successful");
+          })
         }
-        user = User.updateOne({ username: username }, { password: result });
-        user.save();
-        return res.json("Password Change Successful");
       });
     }
   });
