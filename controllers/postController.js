@@ -25,7 +25,7 @@ const updatePost = (req, res, next) => {
       if (!post) {
         return res.json("Post with title does not exists");
       } else {
-        Post.updateOne({ id: id }, { title: title, content: content }).then(
+        Post.updateOne({ _id: id }, { title: title, content: content }).then(
           (data) => {
             console.log(data);
             return res.json("Update of post successful");
@@ -43,7 +43,7 @@ const deletePost = (req, res, next) => {
   if (!id) {
     return res.json("Enter id of post to delete");
   } else {
-    Post.deleteOne({ id: id })
+    Post.deleteOne({ _id: id })
       .then((data) => {
         console.log(data);
         return res.json("Post Deleted");
